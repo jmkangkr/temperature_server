@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
 import datetime
+import sensor
 
 
 app = Flask(__name__)
@@ -8,9 +9,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return json.dumps({'TEMPERATURE': 25.5, 'HUMIDITY': 0.65})
+    temperature_and_humidity = sensor.read_temperature_and_humidity()
+    return json.dumps(temperature_and_humidity)
 
 
 if __name__ == '__main__':
-    print("============ " + str(datetime.datetime.now()))
+    print("============ " + datetime.datetime.now().strftime('%Y-%m-d %H:%M:%S'))
+    sensor.initialize()
     app.run(debug=True, host='0.0.0.0')
