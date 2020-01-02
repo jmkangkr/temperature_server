@@ -4,15 +4,15 @@ import datetime
 import sensor
 import atexit
 import time
-from apscheduler.scheduler import Scheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 
 
 def print_date_time():
     print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
 
 
-scheduler = Scheduler()
-scheduler.add_interval_job(print_date_time, seconds=60, start_date='2020-01-01 00:00')
+scheduler = BackgroundScheduler()
+scheduler.add_job(print_date_time(), 'cron', minute='*')
 scheduler.start()
 
 # Shut down the scheduler when exiting the app
