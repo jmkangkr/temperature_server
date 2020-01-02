@@ -5,7 +5,6 @@ import sensor
 import atexit
 import time
 from apscheduler.schedulers.background import BackgroundScheduler
-from pprint import pprint
 
 
 temperature_and_humidity = None
@@ -13,9 +12,9 @@ temperature_and_humidity = None
 
 def read_temperature_and_humidity():
     global temperature_and_humidity
-    pprint("{}".format(time.strftime("%Y-%m-%d %H:%M:%S")))
+    print("{}".format(time.strftime("%Y-%m-%d %H:%M:%S")))
     temperature_and_humidity = sensor.read_temperature_and_humidity()
-    pprint(str(temperature_and_humidity))
+    print(str(temperature_and_humidity))
 
 
 app = Flask(__name__)
