@@ -7,16 +7,13 @@ import time
 from apscheduler.schedulers.background import BackgroundScheduler
 
 
-def print_date_time():
-    print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
+temperature_and_humidity = None
 
 
-scheduler = BackgroundScheduler()
-scheduler.add_job(print_date_time, 'cron', minute='*')
-scheduler.start()
-
-# Shut down the scheduler when exiting the app
-atexit.register(lambda: scheduler.shutdown())
+def read_temperature_and_humidity():
+    global temperature_and_humidity
+    temperature_and_humidity = sensor.read_temperature_and_humidity()
+    print("{} - {}".format(time.strftime("%Y-%m-%d %H:%M:%S"), str(temperature_and_humidity)))
 
 
 app = Flask(__name__)
@@ -31,4 +28,10 @@ def index():
 if __name__ == '__main__':
     print("============ " + datetime.datetime.now().strftime('%Y-%m-d %H:%M:%S'))
     sensor.initialize()
+
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(read_temperature_and_humidity, 'cron', minute='*')
+    scheduler.start()
+    atexit.register(lambda: scheduler.shutdown())
+
     app.run(use_reloader=False, debug=True, host='0.0.0.0')
