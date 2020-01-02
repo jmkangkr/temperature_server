@@ -13,8 +13,8 @@ temperature_and_humidity = None
 
 def read_temperature_and_humidity():
     global temperature_and_humidity
-    temperature_and_humidity = sensor.read_temperature_and_humidity()
     pprint("{}".format(time.strftime("%Y-%m-%d %H:%M:%S")))
+    temperature_and_humidity = sensor.read_temperature_and_humidity()
     pprint(str(temperature_and_humidity))
 
 
