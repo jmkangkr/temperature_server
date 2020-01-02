@@ -12,7 +12,7 @@ def print_date_time():
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(print_date_time(), 'cron', minute='*')
+scheduler.add_job(print_date_time, 'cron', minute='*')
 scheduler.start()
 
 # Shut down the scheduler when exiting the app
