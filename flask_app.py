@@ -2,6 +2,21 @@ from flask import Flask
 import json
 import datetime
 import sensor
+import atexit
+import time
+from apscheduler.schedulers.background import BackgroundScheduler
+
+
+def print_date_time():
+    print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
+
+
+scheduler = BackgroundScheduler()
+scheduler.add_interval_job(print_date_time, seconds=60, start_date='2020-01-01 00:00')
+scheduler.start()
+
+# Shut down the scheduler when exiting the app
+atexit.register(lambda: scheduler.shutdown())
 
 
 app = Flask(__name__)
