@@ -21,13 +21,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    temperature_and_humidity = sensor.read_temperature_and_humidity()
     return json.dumps(temperature_and_humidity)
 
 
 if __name__ == '__main__':
     print("============ " + datetime.datetime.now().strftime('%Y-%m-d %H:%M:%S'))
     sensor.initialize()
+    read_temperature_and_humidity()
 
     scheduler = BackgroundScheduler()
     scheduler.add_job(read_temperature_and_humidity, 'cron', minute='*')
