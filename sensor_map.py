@@ -7,8 +7,10 @@ SENSOR_MAP = {'boiler-rpi'  : [{'IN_PIPE_SENSOR'          : (SENSOR_TYPE_DS18B20
                                {'OUT_BED_ROOM_SENSOR'     : (SENSOR_TYPE_DS18B20, '28-0309977917ea')},
                                {'OUT_COMPUTER_ROOM_SENSOR': (SENSOR_TYPE_DS18B20, '28-031197798c66')},
                                {'OUT_HANS_ROOM_SENSOR'    : (SENSOR_TYPE_DS18B20, '28-030897790650')}],
-              'bedroom-rpi' : [{'BED_ROOM_SENSOR':  (SENSOR_TYPE_DHT22, '4')}],
-              'hansroom-rpi': [{'HANS_ROOM_SENSOR': (SENSOR_TYPE_DHT22, '4')}]
+              'livingroom-rpi'  : [{'LIVING_ROOM_SENSOR'  : (SENSOR_TYPE_DHT22, '4')}],
+              'bedroom-rpi'     : [{'BED_ROOM_SENSOR'     : (SENSOR_TYPE_DHT22, '4')}],
+              'computerroom-rpi': [{'COMPUTER_ROOM_SENSOR': (SENSOR_TYPE_DHT22, '4')}],
+              'hansroom-rpi'    : [{'HANS_ROOM_SENSOR'    : (SENSOR_TYPE_DHT22, '4')}]
               }
 
 SENSOR_NAMES = (
@@ -18,5 +20,14 @@ SENSOR_NAMES = (
     'OUT_BED_ROOM_SENSOR',
     'OUT_COMPUTER_ROOM_SENSOR',
     'OUT_HANS_ROOM_SENSOR',
+    'LIVING_ROOM_SENSOR',
     'BED_ROOM_SENSOR',
+    'COMPUTER_ROOM_SENSOR',
     'HANS_ROOM_SENSOR')
+
+SENSOR_RELATION = (
+    ('LIVING_ROOM_SENSOR', 'OUT_LIVING_ROOM0_SENSOR'),
+    ('BED_ROOM_SENSOR', 'OUT_BED_ROOM_SENSOR'),
+    ('COMPUTER_ROOM_SENSOR', 'OUT_COMPUTER_ROOM_SENSOR'),
+    ('HANS_ROOM_SENSOR', 'OUT_HANS_ROOM_SENSOR')
+)
