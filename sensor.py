@@ -23,7 +23,9 @@ def initialize():
 
 def read_temperature_and_humidity():
     temperature_and_humidity = {}
+    sleep_amount = 0.0
     for sensor_name, (sensor_type, sensor_handle) in sensor_handles.items():
+        time.sleep(sleep_amount)
         if sensor_type == SENSOR_TYPE_DS18B20:
             temperature = sensor_ds18b20.read_temperature(sensor_handle)
             humidity = None
@@ -32,6 +34,6 @@ def read_temperature_and_humidity():
         else:
             raise RuntimeError("Invalid sensor type")
         temperature_and_humidity[sensor_name] = temperature, humidity
-        time.sleep(2.0)
+        sleep_amount = 2.0
 
     return temperature_and_humidity
