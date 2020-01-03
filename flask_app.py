@@ -40,7 +40,7 @@ def setup_logger(logger_name, log_dir_name, log_file_name):
     except FileExistsError:
         pass
 
-    fh = TimedRotatingFileHandler(os.path.join(log_dir_name, log_file_name), when="midnight", backupCount=14)
+    fh = TimedRotatingFileHandler(os.path.join(log_dir_name, log_file_name), when="midnight", backupCount=2)
 
     fh.setLevel(logging.NOTSET)
 
