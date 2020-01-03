@@ -22,17 +22,6 @@ def read_temperature_and_humidity():
     temperature_and_humidity = sensor.read_temperature_and_humidity()
     log.info("{}".format(temperature_and_humidity))
 
-    error_sensors = []
-    for sens, value in temperature_and_humidity.items():
-        if value[0] == None:
-            log.warning("Couldn't read temperature")
-            error_sensors.append(sens)
-
-    for sens in error_sensors:
-        temperature_and_humidity[sens] = (99.9, 99.9)
-
-    log.info(str(temperature_and_humidity))
-
 
 app = Flask(__name__)
 
