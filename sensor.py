@@ -3,12 +3,20 @@ import socket
 import sensor_dht22
 import sensor_ds18b20
 import time
+import logging
+
+
+log = None
 
 
 sensor_handles = {}
 
 
 def initialize():
+    global log
+
+    log = logging.getLogger(__name__)
+
     hostname = socket.gethostname()
     for sensor in SENSOR_MAP[hostname]:
         for sensor_name, (sensor_type, sensor_unique) in sensor.items():
@@ -32,6 +40,7 @@ def read_temperature_and_humidity():
             for _ in range(0, MAX_RETRY):
                 t, h = sensor_ds18b20.read_temperature(sensor_handle), None
                 if t != None:
+                    log.warning("Couldn't read temperature. Retry...")
                     temperature = t
                     humidity = h
                     break
@@ -39,6 +48,7 @@ def read_temperature_and_humidity():
             for _ in range(0, MAX_RETRY):
                 t, h = sensor_dht22.read_temperature_and_humidity(sensor_handle)
                 if t != None:
+                    log.warning("Couldn't read temperature. Retry...")
                     temperature = t
                     humidity = h
                     break
