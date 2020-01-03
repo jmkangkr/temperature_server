@@ -37,21 +37,21 @@ def read_temperature_and_humidity():
         time.sleep(sleep_amount)
         temperature, humidity = 99.9, 99.9
         if sensor_type == SENSOR_TYPE_DS18B20:
-            for _ in range(0, MAX_RETRY):
+            for retry in range(0, MAX_RETRY):
                 t, h = sensor_ds18b20.read_temperature(sensor_handle), None
                 if t != None:
-                    log.warning("Couldn't read temperature. Retry...")
                     temperature = t
                     humidity = h
                     break
+                log.warning("Couldn't read temperature. Retry... ({})".format(retry))
         elif sensor_type == SENSOR_TYPE_DHT22:
-            for _ in range(0, MAX_RETRY):
+            for retry in range(0, MAX_RETRY):
                 t, h = sensor_dht22.read_temperature_and_humidity(sensor_handle)
                 if t != None:
-                    log.warning("Couldn't read temperature. Retry...")
                     temperature = t
                     humidity = h
                     break
+                log.warning("Couldn't read temperature. Retry...({})".format(retry))
         else:
             raise RuntimeError("Invalid sensor type")
         temperature_and_humidity[sensor_name] = temperature, humidity
