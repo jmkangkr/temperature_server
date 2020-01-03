@@ -58,9 +58,9 @@ def setup_logger(logger_name, log_dir_name, log_file_name):
     ch = logging.StreamHandler()
     ch.setLevel(logging.NOTSET)
 
-    #formatter = logging.Formatter('%(message)s')
-    #ch.setFormatter(formatter)
-    #fh.setFormatter(formatter)
+    formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+    ch.setFormatter(formatter)
+    fh.setFormatter(formatter)
 
     logger.addHandler(ch)
     logger.addHandler(fh)
